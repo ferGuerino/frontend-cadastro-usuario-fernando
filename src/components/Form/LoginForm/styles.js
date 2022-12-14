@@ -58,4 +58,8 @@ export const FormStyled = styled.div`
     border-radius: var(--border-radius-1);
     color: var(--gray-0);
   }
+  .pErrors {
+    color: var(--color-negative);
+    font-size: var(--font-size-3);
+  }
 `;

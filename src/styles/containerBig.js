@@ -7,4 +7,8 @@ export const ContainerBig = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 775px) {
+    width: 369px;
+  }
 `;

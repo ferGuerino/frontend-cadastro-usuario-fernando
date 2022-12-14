@@ -1,22 +1,20 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import Dashboard from "./pages/DashboardPage";
 import Login from "./pages/LoginPage";
 import NotFound from "./pages/NotFoudPage";
 import Register from "./pages/RegisterPage";
 
-function RoutesPages({ setUser, userLogin, userRegister, userLogout }) {
+function RoutesPages({ userRegister }) {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<Login setUser={setUser} userLogin={userLogin} />}
-      />
+      <Route path="/" element={<Login />} />
       <Route
         path="/register"
-        element={<Register userRegister={userRegister} setUser={setUser} />}
+        element={<Register userRegister={userRegister} />}
       />
-      <Route path="/home" element={<Dashboard userLogout={userLogout} />} />
+      <Route path="/home" element={<Dashboard />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -34,7 +34,7 @@ function LoginForm({ userLogin }) {
           {...register("email")}
           disabled={loading}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <p className="pErrors">{errors.email.message}</p>}
         <label htmlFor="password">Senha</label>
         <input
           id="password"
@@ -43,7 +43,9 @@ function LoginForm({ userLogin }) {
           {...register("password")}
           disabled={loading}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && (
+          <p className="pErrors">{errors.password.message}</p>
+        )}
         <button type="submit" disabled={loading}>
           {loading ? "Entrando..." : "Entrar"}
         </button>

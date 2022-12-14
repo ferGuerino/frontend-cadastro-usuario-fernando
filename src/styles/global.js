@@ -8,8 +8,9 @@ export const GlobalStyle = createGlobalStyle`
   --color-primary-negative: #59323f;
 
   --color-negative: #E83F5B;  
-  --color-sucess: #3FE864
+  --color-sucess: #3FE864;
   
+  --color-bg-modal: rgba(0,0,0,.5);
 
   --gray-4: #121214;
   --gray-3: #212529;

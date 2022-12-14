@@ -1,32 +1,28 @@
 import React from "react";
-import { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
-import { api } from "../../api";
+import { Navigate } from "react-router-dom";
 import Header from "../../components/Header";
 import UserInfoDash from "../../components/Section/UserInfoDash";
 import UserProfile from "../../components/Section/UserProfile";
+import Techlist from "../../components/TechList";
+import TechModal from "../../components/TechModal";
+import TechModalEdit from "../../components/TechModalEdit";
+import { TechProvider } from "../../contexts/TechContext";
+import { UserContext } from "../../contexts/UserContext";
 import { ContainerBig } from "../../styles/containerBig";
 import { DivHome } from "./styles";
 
-function Dashboard({ userLogout }) {
-  const userId = localStorage.getItem("@USERID");
-  const [userInfo, setUserInfo] = useState({});
+function Dashboard() {
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
+  const { user, loading, userLogout } = useContext(UserContext);
 
-  useEffect(() => {
-    async function getUserLoged() {
-      try {
-        const request = await api.get(`users/${userId}`);
-        const response = request.data;
-        console.log(response);
-        setUserInfo(response);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getUserLoged();
-  }, [userId]);
+  if (loading) {
+    return <h1>Carregando...</h1>;
+  }
 
-  return (
+  return user ? (
     <DivHome>
       <ContainerBig>
         <div className="headerContent">
@@ -34,17 +30,20 @@ function Dashboard({ userLogout }) {
           <button onClick={() => userLogout()}>Sair</button>
         </div>
       </ContainerBig>
-      <UserProfile userInfo={userInfo} />
-      <UserInfoDash />
+      <UserProfile />
+      <UserInfoDash setOpenModal={setOpenModal} />
+      <TechProvider
+        setOpenModal={setOpenModal}
+        setOpenModalEdit={setOpenModalEdit}
+      >
+        <Techlist setOpenModalEdit={setOpenModalEdit} />
+        {openModal && <TechModal setOpenModal={setOpenModal} />}
+        {openModalEdit && <TechModalEdit setOpenModalEdit={setOpenModalEdit} />}
+      </TechProvider>
     </DivHome>
+  ) : (
+    <Navigate to="/" />
   );
 }
 
 export default Dashboard;
-
-//
-//       <h3>{userInfo.email}</h3>
-//       <h3>{userInfo.bio}</h3>
-//       <h3>{userInfo.contact}</h3>
-//       <h3>{userInfo.course_module}</h3>
-//

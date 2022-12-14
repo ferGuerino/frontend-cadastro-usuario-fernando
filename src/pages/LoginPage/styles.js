@@ -13,3 +13,10 @@ export const HeaderContent = styled.div`
     color: var(--white);
   }
 `;
+
+export const H1Load = styled.h1`
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
